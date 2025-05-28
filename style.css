@@ -1,0 +1,592 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f8f8f8;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+h1 {
+    color: #d7263d;
+    margin-top: 30px;
+    font-size: 2.5em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+h2 {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+h3, h4, .production-auto, .score-box, .shop, .prestige, .permanent-upgrades-panel {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#tomate {
+    display: block;
+    width: 150px;
+    cursor: pointer;
+    margin: 20px;
+    border-radius: 50%;
+    box-shadow: 0 4px 16px #d7263d44;
+    transition: transform 0.25s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.2s;
+    /* animation: tomate-bounce 1.7s cubic-bezier(.68,-0.55,.27,1.55) infinite; */
+}
+/* @keyframes tomate-bounce { ... } supprimé car plus de rebond */
+#tomate:active {
+    transform: scale(0.93);
+    box-shadow: 0 2px 8px #d7263d33;
+}
+
+.shop, .prestige {
+    margin: 20px auto;
+    width: 300px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 8px #ccc;
+}
+.shop h3, .prestige h3 {
+    color: #d7263d;
+    margin-bottom: 12px;
+}
+
+button {
+    padding: 8px 16px;
+    margin: 5px;
+    border: 2px solid ;
+    background: linear-gradient(90deg, #d7263d 0%, #f8b500 100%);
+    background-clip: padding-box, border-box;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #d7263d22;
+    transition: background 0.2s, transform 0.1s;
+    position: relative;
+    z-index: 1;
+}
+button span {
+    /* Suppression du fond et du border-radius */
+    background: none !important;
+    border-radius: 0;
+    color: #fff !important;
+    padding: 0;
+    margin-left: 4px;
+    font-size: 0.95em;
+    transition: color 0.2s;
+    z-index: 2;
+}
+button:disabled, button.disabled {
+    background: #bbb !important;
+    color: #eee !important;
+    border: 2px solid #bbb !important;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+button:disabled span, button.disabled span {
+    color: #eee !important;
+    background: none !important;
+}
+button:hover:not(:disabled) span {
+    color: #fff !important;
+    background: none !important;
+}
+button:disabled {
+    background: #ccc;
+    color: #888;
+    cursor: not-allowed;
+}
+button:hover:not(:disabled) {
+    background: linear-gradient(90deg, #f8b500 0%, #d7263d 100%);
+    transform: scale(1.05);
+}
+
+.shop span, .prestige span {
+    font-size: 1.1em;
+    color: #d7263d;
+    font-weight: bold;
+}
+
+/* Ajout pour la production automatique */
+#autoRate {
+    color: #d7263d;
+    font-weight: bold;
+}
+.production-auto {
+    font-size: 1.1em;
+    color: #d7263d;
+    margin-bottom: 10px;
+}
+
+.score-box {
+    background: #fff8f0;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px #d7263d22;
+    border: 2px solid #f8b50044;
+    width: 370px;
+    margin: 25px auto 0 auto;
+    padding: 18px 0 10px 0;
+}
+
+.shop-panel {
+    position: relative;
+    width: 340px;
+    margin: 25px auto 0 auto;
+    text-align: left;
+}
+.shop-btn:after {
+    /* Applique la même bordure et le même fond en même temps */
+    display: inline-block;
+    background: linear-gradient(90deg, #d7263d 0%, #f8b500 100%);
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px 8px 0 0;
+    transition: background 0.2s;
+    position: relative;
+    z-index: 1;
+}
+.shop-btn {
+    padding: 12px 28px;
+    font-size: 1.15em;
+    font-weight: bold;
+    border: 2px solid white !important;
+    border-radius: 18px;
+    background: linear-gradient(90deg, #d7263d 0%, #f8b500 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px #d7263d33, 0 2px 8px #f8b50033;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.18s, box-shadow 0.18s;
+    outline: none;
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    display: inline-block;
+}
+.shop-btn:hover, .shop-btn:focus {
+    background: linear-gradient(90deg, #f8b500 0%, #d7263d 100%);
+    transform: scale(1.06);
+    box-shadow: 0 6px 24px #d7263d44, 0 4px 16px #f8b50044;
+}
+.shop-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px #d7263d22;
+}
+.shop-btn .prestige {
+    padding: 10px 22px;
+    cursor: pointer;
+    font-size: 1.1em;
+    border: 2px solid white;
+    background-clip: padding-box;
+    margin-bottom: 0;
+    box-shadow: 0 2px 8px #d7263d22;
+}
+#shop-toggle ~ .shop-content {
+    display: none;
+}
+#shop-toggle:checked ~ .shop-content {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    background: #fff8f0;
+    border-radius: 0 0 14px 14px;
+    box-shadow: 0 8px 24px #d7263d33;
+    border: 4px solid #f8b50044;
+    z-index: 10;
+    padding: 18px 18px 10px 18px;
+    opacity: 1;
+    pointer-events: auto;
+    animation: shopOpen 0.35s cubic-bezier(.68,-0.55,.27,1.55);
+    transform: translateY(0) scale(1);
+}
+.shop-section {
+    margin-bottom: 18px;
+}
+.shop-section h4 {
+    color: #d7263d;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+/* Ajout du style .side-panel pour afficher la boutique en panneau latéral à gauche, avec le bouton d'ouverture sur le côté. Adaptation responsive incluse. */
+.side-panel {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: auto;
+    width: 400px;
+    max-width: 98vw;
+    z-index: 100;
+    margin: 0;
+    text-align: left;
+    background: none;
+    box-shadow: none;
+    border: none;
+    border-radius: 18px;
+}
+.side-panel .shop-btn {
+    border-radius: 18px;
+    position: absolute;
+    left: 16px;
+    right: auto;
+    top: 20px;
+    height: 40px;
+    min-width: 90px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 8px #d7263d22;
+    background: linear-gradient(90deg, #d7263d 0%, #f8b500 100%);
+    color: #fff;
+    z-index: 110;
+}
+#shop-toggle ~ .shop-content {
+    display: none;
+}
+#shop-toggle:checked ~ .shop-content {
+    display: block;
+    position: static;
+    background: #fff8f0;
+    box-shadow: 0 8px 24px #d7263d33;
+    border: 2px solid #f8b50044;
+    border-radius: 18px;
+    z-index: 10;
+    padding: 18px 18px 10px 18px;
+    margin-top: 48px;
+    margin-left: 10px;
+    width: 100%;
+    opacity: 1;
+    pointer-events: auto;
+    animation: shopOpen 0.35s cubic-bezier(.68,-0.55,.27,1.55);
+    transform: translateX(0) scale(1);
+}
+@media (max-width: 600px) {
+    .side-panel {
+        width: 98vw;
+        left: 0;
+        right: auto;
+    }
+    .side-panel .shop-btn {
+        left: 10px;
+        right: auto;
+        width: calc(100vw - 20px);
+        min-width: 120px;
+        top: -60px;
+    }
+}
+
+@media (max-width: 500px) {
+    .shop, .prestige {
+        width: 95vw;
+        padding: 10px 2vw;
+    }
+    #tomate {
+        width: 120px;
+    }
+    .score-box {
+        width: 95vw;
+        padding: 10px 2vw;
+    }
+    .shop-panel, .shop-content {
+        width: 95vw;
+    }
+}
+
+.main-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 10px;
+    min-height: 70vh;
+}
+
+.separator {
+    width: 2px;
+    min-height: 350px;
+    background: linear-gradient(180deg, #f8b500 0%, #d7263d 100%);
+    margin: 0 30px;
+    border-radius: 2px;
+    align-self: stretch;
+    box-shadow: 0 0 8px #d7263d22;
+}
+
+.tomate-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 200px;
+    margin-left: 0;
+}
+
+@media (max-width: 900px) {
+    .main-content {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 20px;
+    }
+    .separator {
+        width: 90vw;
+        min-height: 2px;
+        margin: 20px 0;
+        background: linear-gradient(90deg, #f8b500 0%, #d7263d 100%);
+    }
+    .tomate-container {
+        margin-left: 0;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 800px) {
+    .main-content {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+    .tomate-container {
+        align-items: center;
+        margin-left: 0;
+        margin-top: 30px;
+    }
+    .separator {
+        width: 100%;
+        height: 2px;
+        min-height: unset;
+        margin: 30px 0;
+        background: linear-gradient(90deg, #f8b500 0%, #d7263d 100%);
+    }
+}
+
+/* Ajout du style pour afficher le panneau des améliorations permanentes à droite de la page, avec adaptation responsive. */
+.permanent-upgrades-panel {
+    position: absolute;
+    top: 100px;
+    right: 0;
+    width: 320px;
+    max-width: 95vw;
+    background: #fff8f0;
+    border-radius: 18px 0 0 18px;
+    box-shadow: 0 4px 18px #d7263d22;
+    border: 2px solid #f8b50044;
+    padding: 22px 18px 18px 18px;
+    z-index: 120;
+    text-align: center;
+    margin-top: 0;
+}
+.permanent-upgrades-panel h4 {
+    color: #d7263d;
+    margin-bottom: 12px;
+    font-size: 1.2em;
+}
+.permanent-upgrades-panel button {
+    width: 100%;
+    margin-bottom: 0;
+    position: relative;
+    /* Par défaut, bouton actif (coloré) */
+    background: linear-gradient(90deg, #d7263d 0%, #f8b500 100%) !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+    cursor: pointer !important;
+    box-shadow: 0 2px 8px #d7263d22 !important;
+    opacity: 1 !important;
+    transition:
+        background 0.25s cubic-bezier(.68,-0.55,.27,1.55),
+        color 0.18s,
+        box-shadow 0.22s cubic-bezier(.68,-0.55,.27,1.55),
+        transform 0.18s cubic-bezier(.68,-0.55,.27,1.55),
+        opacity 0.18s;
+}
+/* Boutons désactivés (grisés) */
+.permanent-upgrades-panel button:disabled,
+.permanent-upgrades-panel button.disabled {
+    background: #bbb !important;
+    color: #eee !important;
+    border: 2px solid #ccc !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    opacity: 0.7 !important;
+}
+.permanent-upgrades-panel span {
+    margin-left: 8px;
+    color: #d7263d;
+    font-weight: bold;
+}
+.perm-desc {
+    display: none;
+    position: absolute;
+    left: -220px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 200px;
+    background: #fff8f0;
+    border: 1.5px solid #f8b500;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #d7263d22;
+    color: #333;
+    font-size: 0.98em;
+    padding: 10px 14px;
+    z-index: 9999;
+    white-space: normal;
+    pointer-events: none;
+    /* Ajout d'une transition douce */
+    opacity: 0;
+    transform: translateY(-50%) translateX(-10px);
+    transition:
+        opacity 0.25s cubic-bezier(.68,-0.55,.27,1.55),
+        transform 0.25s cubic-bezier(.68,-0.55,.27,1.55);
+}
+.perm-upg-row {
+    position: relative;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    /* Ajout pour permettre à la bulle de dépasser */
+    overflow: visible;
+    z-index: 10;
+}
+.permanent-upgrades-panel button:hover + .perm-desc,
+.permanent-upgrades-panel button:focus + .perm-desc {
+    display: block;
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+@media (max-width: 900px) {
+    .permanent-upgrades-panel {
+        position: absolute;
+        top: 100px;
+        right: 0;
+        width: 320px;
+        border-radius: 18px 0 0 18px;
+        margin: 0;
+        box-shadow: 0 4px 18px #d7263d22;
+    }
+}
+
+/* Hover panel pour le bouton Statistiques */
+#stats-btn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 201;
+    background: linear-gradient(90deg, #d7263d 0%, #f8b500 100%);
+    color: #ffffff;
+    font-weight: bold;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px #d7263d44;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#stats-hover-panel {
+    display: none;
+    position: fixed;
+    top: 60px;
+    right: 18px;
+    min-width: 260px;
+    background: #fff8f0;
+    color: #333;
+    border: 2px solid #f8b50044;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px #d7263d22;
+    padding: 18px 22px 14px 22px;
+    z-index: 202;
+    text-align: left;
+    font-size: 1.05em;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-25px) scale(0.97);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+#stats-btn:hover + #stats-hover-panel,
+#stats-hover-panel:hover {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+    animation: statsOpen 0.35s cubic-bezier(.68,-0.55,.27,1.55);
+    transform: translateY(0) scale(1);
+}
+
+/* Griser les boutons désactivés dans la boutique et les améliorations */
+.shop button:disabled,
+.shop button.disabled,
+.prestige button:disabled,
+.prestige button.disabled,
+.permanent-upgrades-panel button:disabled,
+.permanent-upgrades-panel button.disabled {
+    background: #bbb !important;
+    color: #eee !important;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.7;
+    /* Grise la case d'achat */
+    border: 2px solid #ccc !important;
+}
+
+/* Animation pour l'ouverture de la boutique */
+@keyframes shopOpen {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.97);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Animation pour l'ouverture du panneau statistiques */
+@keyframes statsOpen {
+    0% {
+        opacity: 0;
+        transform: translateY(-25px) scale(0.97);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.shop-content {
+    /* Ajout pour permettre l'animation */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-30px) scale(0.97);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+/* Pour la version latérale (side-panel) */
+.side-panel .shop-content {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-40px) scale(0.97);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.shop-content button {
+    border: 2px solid white;
+}
+
+/* Animation pour le spinner de chargement */
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
